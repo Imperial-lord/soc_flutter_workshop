@@ -15,6 +15,11 @@ class _EnterNameState extends State<EnterName> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Upload Name',
+        ),
+      ),
       body: SafeArea(
         child: Center(
           child: Column(
@@ -26,17 +31,21 @@ class _EnterNameState extends State<EnterName> {
               ),
               Padding(padding: EdgeInsets.all(10)),
               Container(
-                width: 200,
+                width: 250,
                 child: CupertinoTextField(
-                  controller: nameController,
+                  padding: EdgeInsets.all(15),
+                  placeholder: 'Your Name',
                 ),
               ),
               Padding(padding: EdgeInsets.all(10)),
               ElevatedButton(
                 onPressed: () {
-                  print('Upload Name');
-                  FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
-                  firestoreInstance.collection('Names').doc(DateTime.now().toString()).set({
+                  FirebaseFirestore firestoreInstance =
+                      FirebaseFirestore.instance;
+                  firestoreInstance
+                      .collection('Names')
+                      .doc(DateTime.now().toString())
+                      .set({
                     'name': nameController.text,
                   });
                 },
